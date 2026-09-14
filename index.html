@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#160d14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>For Susooo ❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #ff849d;
+      --pink-soft: #ffb5c3;
+      --ink: #fff9fb;
+      --panel: rgba(28, 13, 25, .58);
+      --border: rgba(255,255,255,.22);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: #120a11;
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+    }
+
+    body { min-height: 100svh; }
+
+    button, input { font: inherit; }
+
+    .page {
+      position: relative;
+      min-height: 100svh;
+      min-height: 100dvh;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      display: grid;
+      place-items: center;
+      padding:
+        max(24px, env(safe-area-inset-top))
+        max(18px, env(safe-area-inset-right))
+        max(24px, env(safe-area-inset-bottom))
+        max(18px, env(safe-area-inset-left));
+      isolation: isolate;
+    }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      z-index: -3;
+      inset: -24px;
+      background:
+        linear-gradient(rgba(12, 7, 12, .48), rgba(12, 7, 12, .66)),
+        url("background.jpeg") center / cover no-repeat;
+      filter: blur(12px);
+      transform: scale(1.05);
+    }
+
+    .page::after {
+      content: "";
+      position: fixed;
+      z-index: -2;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 25%, rgba(255, 126, 155, .20), transparent 38%),
+        linear-gradient(135deg, rgba(18, 8, 18, .25), rgba(44, 16, 35, .48));
+      pointer-events: none;
+    }
+
+    .glow {
+      position: fixed;
+      z-index: -1;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255, 130, 157, .24);
+      filter: blur(75px);
+      pointer-events: none;
+      animation: float 9s ease-in-out infinite;
+    }
+    .g1 { top: -150px; left: -120px; }
+    .g2 { right: -150px; bottom: -160px; animation-delay: -4s; }
+
+    .card {
+      width: min(450px, 100%);
+      padding: clamp(28px, 6vw, 44px) clamp(20px, 6vw, 34px);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--panel);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 28px 90px rgba(0,0,0,.44);
+      text-align: center;
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .heart {
+      display: inline-block;
+      font-size: clamp(42px, 12vw, 54px);
+      line-height: 1;
+      animation: beat 1.45s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      margin-top: 9px;
+      font-size: 11px;
+      letter-spacing: 2.7px;
+      text-transform: uppercase;
+      opacity: .72;
+    }
+
+    .hello {
+      margin: 12px 0 4px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(28px, 8vw, 33px);
+      font-weight: 600;
+    }
+
+    .title {
+      margin: 12px 0 12px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(43px, 12vw, 58px);
+      line-height: .98;
+    }
+
+    .sub {
+      max-width: 330px;
+      margin: 0 auto 25px;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: .76;
+    }
+
+    .input-wrap { position: relative; }
+
+    .input {
+      width: 100%;
+      height: 56px;
+      min-height: 52px;
+      border: 1px solid rgba(255,255,255,.30);
+      border-radius: 16px;
+      outline: none;
+      background: rgba(255,255,255,.09);
+      color: #fff;
+      padding: 0 52px 0 17px;
+      font-size: 16px;
+      -webkit-appearance: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .input::placeholder { color: rgba(255,255,255,.52); }
+    .input:focus {
+      border-color: var(--pink-soft);
+      box-shadow: 0 0 0 4px rgba(255, 150, 170, .12);
+    }
+
+    .lock {
+      position: absolute;
+      top: 50%;
+      right: 17px;
+      transform: translateY(-50%);
+      opacity: .78;
+      pointer-events: none;
+    }
+
+    .btn {
+      width: 100%;
+      height: 56px;
+      margin-top: 12px;
+      border: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #ff879f, #e45b7d);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 12px 30px rgba(231,91,120,.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn:active { transform: scale(.985); }
+    @media (hover:hover) {
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 34px rgba(231,91,120,.35);
+      }
+    }
+
+    .hint {
+      min-height: 23px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #ffb6c2;
+    }
+    .hint.success { color: #c9ffda; }
+
+    #reveal {
+      display: none;
+      width: min(820px, 100%);
+      padding: 8px 0;
+      text-align: center;
+      animation: appear .8s ease both;
+    }
+
+    .reveal-heading {
+      width: min(100%, 650px);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quote {
+      direction: ltr;
+      unicode-bidi: isolate;
+      width: 100%;
+      margin: 5px auto 9px;
+      font-family: "Noto Naskh Arabic", "Times New Roman", serif;
+      font-size: clamp(22px, 6vw, 29px);
+      font-weight: 700;
+      line-height: 1.05;
+      text-align: center;
+      text-shadow: 0 5px 30px rgba(0,0,0,.42);
+    }
+
+    .line {
+      width: 100px;
+      height: 1px;
+      margin: 0 auto 20px;
+      background: rgba(255,255,255,.44);
+    }
+
+    .photo-frame {
+      width: min(650px, 100%);
+      margin: 0 auto;
+      display: block;
+      overflow: hidden;
+      border: 0;
+      border-radius: 20px;
+      background: transparent;
+      box-shadow: 0 28px 80px rgba(0,0,0,.52);
+    }
+
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .player {
+      width: min(650px, 100%);
+      margin: 16px auto 0;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 19px;
+      background: rgba(28, 13, 25, .64);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 45px rgba(0,0,0,.22);
+      text-align: left;
+    }
+
+    .disc {
+      width: 49px;
+      height: 49px;
+      flex: 0 0 49px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      font-size: 22px;
+    }
+
+    .track { min-width: 0; flex: 1; }
+    .track b {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 14px;
+    }
+    .track small {
+      display: block;
+      margin-top: 3px;
+      opacity: .62;
+      font-size: 12px;
+    }
+
+    .music-btn {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      border: 0;
+      border-radius: 50%;
+      background: #ff8096;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 2px;
+      overflow: hidden;
+      border-radius: 2px;
+      background: rgba(255,255,255,.10);
+    }
+    .progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: #ff9aae;
+      transition: width .15s linear;
+    }
+
+    .note {
+      margin: 20px auto 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(22px, 6vw, 29px);
+    }
+
+    .back {
+      margin-top: 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 12px;
+      padding: 10px 15px;
+      background: rgba(0,0,0,.12);
+      color: white;
+      cursor: pointer;
+      opacity: .72;
+    }
+
+    .player-wrap { position: relative; }
+
+    .spark {
+      position: fixed;
+      z-index: 20;
+      pointer-events: none;
+      font-size: 20px;
+      animation: rise 2s ease-out forwards;
+    }
+
+    .shake { animation: shake .42s ease; }
+
+    @keyframes beat {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(22px); }
+    }
+
+    @keyframes shake {
+      20% { transform: translateX(-8px); }
+      40% { transform: translateX(8px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(6px); }
+    }
+
+    @keyframes rise {
+      0% { opacity: 1; transform: translateY(0) scale(.7) rotate(0); }
+      100% { opacity: 0; transform: translateY(-170px) scale(1.25) rotate(18deg); }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(24px) scale(.985); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        place-items: start center;
+        padding-top: max(18px, env(safe-area-inset-top));
+      }
+
+      .card {
+        margin: auto 0;
+        border-radius: 26px;
+      }
+
+      #reveal {
+        margin: auto 0;
+      }
+
+      .photo-frame {
+        border-radius: 18px;
+      }
+
+      .player { gap: 10px; padding: 12px; }
+      .disc { width: 44px; height: 44px; flex-basis: 44px; }
+      .music-btn { width: 46px; height: 46px; flex-basis: 46px; }
+    }
+
+    @media (max-height: 650px) and (orientation: landscape) {
+      .page { place-items: start center; }
+      .card { margin: 16px 0; }
+      #reveal { margin: 16px 0; }
+      .photo-frame img { max-height: 52svh; }
+      .quote { font-size: 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page" id="page">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+
+    <section class="card" id="lockScreen" aria-label="Password screen">
+      <div class="heart" aria-hidden="true">♡</div>
+      <div class="eyebrow">A tiny surprise for you</div>
+
+      <h2 class="hello">Hi Susooo ❤️</h2>
+      <h1 class="title">Guess the password</h1>
+
+      <p class="sub">
+        I made a little something just for you...<br>
+        but first, you have to unlock it. ✨
+      </p>
+
+      <form id="unlockForm">
+        <div class="input-wrap">
+          <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="Enter password..."
+            autocomplete="off"
+            autocapitalize="none"
+            autocorrect="off"
+            spellcheck="false"
+            enterkeyhint="go"
+            aria-label="Password"
+          />
+          <span class="lock" aria-hidden="true">🔒</span>
+        </div>
+
+        <button class="btn" id="unlock" type="submit">Unlock ♥</button>
+      </form>
+
+      <div class="hint" id="hint" aria-live="polite">
+        I know you can guess it 😉
+      </div>
+    </section>
+
+    <section id="reveal" aria-label="Your surprise">
+      <div class="reveal-heading">
+        <div class="eyebrow">For you, Susooo ✨</div>
+        <div class="quote" lang="ar" dir="rtl">Love you ❤️</div>
+        <div class="line" aria-hidden="true"></div>
+      </div>
+
+      <div class="photo-frame">
+        <img src="photo1.jpeg" alt="A special memory" />
+      </div>
+
+      <div class="player-wrap">
+        <div class="player">
+          <div class="disc" aria-hidden="true">♫</div>
+
+          <div class="track">
+            <b>Perfect — Ed Sheeran</b>
+            <small>For this moment ❤️</small>
+          </div>
+
+          <button
+            class="music-btn"
+            id="music"
+            type="button"
+            aria-label="Play music"
+            aria-pressed="false"
+          >▶</button>
+        </div>
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+      </div>
+
+      <audio id="song" preload="auto" src="merged-song.mp3"></audio>
+
+      <div class="note">Happiest birthday, my girl ❤️</div>
+      <button class="back" id="back" type="button">Lock again</button>
+    </section>
+  </main>
+
+  <script>
+    // The password is intentionally kept out of the visible UI.
+    const PASSWORD = "Susooo159";
+
+    const lockScreen = document.getElementById("lockScreen");
+    const reveal = document.getElementById("reveal");
+    const form = document.getElementById("unlockForm");
+    const input = document.getElementById("password");
+    const hint = document.getElementById("hint");
+    const song = document.getElementById("song");
+    const music = document.getElementById("music");
+    const progressBar = document.getElementById("progressBar");
+    const back = document.getElementById("back");
+
+    function burst() {
+      const symbols = ["♥", "♡", "✦", "✨", "❤"];
+      for (let i = 0; i < 26; i++) {
+        const spark = document.createElement("span");
+        spark.className = "spark";
+        spark.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        spark.style.left = (20 + Math.random() * 60) + "vw";
+        spark.style.top = (42 + Math.random() * 18) + "vh";
+        spark.style.animationDelay = (Math.random() * .28) + "s";
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 2300);
+      }
+    }
+
+    function syncMusic() {
+      const isPlaying = !song.paused;
+      music.textContent = isPlaying ? "Ⅱ" : "▶";
+      music.setAttribute("aria-label", isPlaying ? "Pause music" : "Play music");
+      music.setAttribute("aria-pressed", String(isPlaying));
+    }
+
+    function updateProgress() {
+      if (!song.duration) return;
+      progressBar.style.width = ((song.currentTime / song.duration) * 100) + "%";
+    }
+
+    async function playSong() {
+      try {
+        await song.play();
+      } catch (error) {
+        // Safari may block autoplay; the custom play button remains available.
+      }
+      syncMusic();
+    }
+
+    function unlock() {
+      if (input.value === PASSWORD) {
+        // Start the audio immediately from the user's tap/submit gesture.
+        playSong();
+
+        hint.textContent = "Correct! 😊 ❤️";
+        hint.className = "hint success";
+        burst();
+
+        lockScreen.style.opacity = "0";
+        lockScreen.style.transform = "scale(.94)";
+
+        setTimeout(() => {
+          lockScreen.style.display = "none";
+          reveal.style.display = "block";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 650);
+      } else {
+        hint.textContent = "Not quite... try again 😊";
+        hint.className = "hint";
+        lockScreen.classList.remove("shake");
+        void lockScreen.offsetWidth;
+        lockScreen.classList.add("shake");
+        input.focus();
+        input.select();
+      }
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      unlock();
+    });
+
+    music.addEventListener("click", () => {
+      if (song.paused) {
+        playSong();
+      } else {
+        song.pause();
+      }
+    });
+
+    song.addEventListener("play", syncMusic);
+    song.addEventListener("pause", syncMusic);
+    song.addEventListener("ended", syncMusic);
+    song.addEventListener("timeupdate", updateProgress);
+
+    back.addEventListener("click", () => {
+      song.pause();
+      song.currentTime = 0;
+      syncMusic();
+
+      reveal.style.display = "none";
+      lockScreen.style.display = "block";
+
+      requestAnimationFrame(() => {
+        lockScreen.style.opacity = "1";
+        lockScreen.style.transform = "none";
+      });
+
+      input.value = "";
+      hint.textContent = "I know you can guess it 😉";
+      hint.className = "hint";
+      input.focus();
+    });
+  </script>
+</body>
+</html>
